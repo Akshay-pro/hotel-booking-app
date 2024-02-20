@@ -6,6 +6,7 @@ import GuestSection from "./GuestSection";
 import ImagesSection from "./ImagesSection";
 
 export type HotelType = {
+  _id:string;
   userId: string;
   name: string;
   city: string;
