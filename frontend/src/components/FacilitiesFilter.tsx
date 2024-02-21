@@ -1,5 +1,4 @@
 import { hotelFacilities } from "../forms/ManageHotelForm/FacilitiesSection";
-import { hotelTypes } from "../forms/ManageHotelForm/TypeSection";
 
 type Props = {
     selectedFacilities: string[];
