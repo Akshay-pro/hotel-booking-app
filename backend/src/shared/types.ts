@@ -12,5 +12,15 @@ export type HotelType = {
     pricePerNight: number;
     starRating: number;
     imageURLs: string[];
+    imageFiles:string[];
     lastUpdated: Date;
 } 
+
+export type HotelSearchResponse = {
+    data: HotelType[];
+    pagination: {
+        total: number;
+        page: number;
+        pages: number;
+    }
+}

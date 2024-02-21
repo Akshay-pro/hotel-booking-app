@@ -5,6 +5,8 @@ import SignIn from "./pages/SignIn";
 import { useAppContext } from "./contexts/AppContext";
 import AddHotel from "./pages/AddHotel";
 import MyHotels from "./pages/MyHotels";
+import EditHotel from "./pages/EditHotel";
+import Search from "./pages/Search";
 
 function App() {
 
@@ -21,7 +23,7 @@ function App() {
             
             <Route path="/search" element = {
               <Layout>
-                  <p>Search Page</p>
+                  <Search  />
               </Layout>
             } />
 
@@ -50,10 +52,17 @@ function App() {
                       <MyHotels  />
                     </Layout>
                   } />
+
+                  <Route path="/edit-hotel/:hotelId" element = {
+                    <Layout>
+                      <EditHotel  />
+                    </Layout>
+                  } />
                 </>
               )
               
             }
+  
             <Route path="*" element={<Navigate to="/" />} />
         </Routes>
     </BrowserRouter>
