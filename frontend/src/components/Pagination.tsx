@@ -7,7 +7,6 @@ export type Props = {
 const Pagination = ({page, pages, onPageChange}:Props) => {
 
     const pageNumber = [];
-    console.log(pages)
     for(let i = 1; i<=pages; i++){
         pageNumber.push(i);
     }

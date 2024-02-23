@@ -153,11 +153,27 @@ export const searchHotels = async (searchParams: SearchParams): Promise<HotelSea
         (star) => queryParams.append("stars", star)
     )
     const response = await fetch(
-        `${API_BASE_URL}/api/hotels/search?${queryParams}`
+        `${API_BASE_URL}/api/hotels/search?${queryParams}`,
+        {
+            method: "GET"
+        }
     );
-
+    
+    console.log(response)
     if(!response.ok){
         throw new Error("Error Fetching Hotels");
+    }
+
+    return response.json();
+}
+
+export const fetchHotelDetailById = async (hotelId: string) : Promise<HotelType> => {
+    const response = await fetch(`${API_BASE_URL}/api/hotels/${hotelId}`,{
+        method: "GET"
+    });
+
+    if(!response.ok){
+        throw new Error ("Error fetching hotel")
     }
 
     return response.json();
