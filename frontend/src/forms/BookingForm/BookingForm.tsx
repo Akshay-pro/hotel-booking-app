@@ -6,7 +6,7 @@ import {
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { StripeCardElement } from "@stripe/stripe-js";
 import { useSearchContext } from "../../contexts/SearchContext";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useMutation } from "react-query";
 import * as apiClient from "../../api-client";
 import { useAppContext } from "../../contexts/AppContext";
@@ -33,25 +33,31 @@ const BookingForm = ({ currentUser, paymentIntent }: Props) => {
     const stripe = useStripe();
     const elements = useElements();
 
+    const navigate = useNavigate();
+
     const search = useSearchContext();
     const { hotelId } = useParams();
 
     const { showToast } = useAppContext();
 
-    const { mutate: bookRoom, isLoading} = useMutation(apiClient.createRoomBooking, {
-        onSuccess: () => {
-            showToast({
-                message: "Booking Saved",
-                type: "SUCCESS",
-            });
-        },
-        onError: () => {
-            showToast({
-                message: "Error Booking Hotel",
-                type: "ERROR",
-            });
-        },
-    });
+    const { mutate: bookRoom, isLoading } = useMutation(
+        apiClient.createRoomBooking,
+        {
+            onSuccess: () => {
+                showToast({
+                    message: "Booking Saved",
+                    type: "SUCCESS",
+                });
+                navigate("/");
+            },
+            onError: () => {
+                showToast({
+                    message: "Error Booking Hotel",
+                    type: "ERROR",
+                });
+            },
+        }
+    );
     const { handleSubmit, register } = useForm<BookingFormData>({
         defaultValues: {
             firstName: currentUser.firstName,
@@ -152,7 +158,7 @@ const BookingForm = ({ currentUser, paymentIntent }: Props) => {
                     type="submit"
                     className="bg-blue-600 text-white p-2 font-bold hover:bg-blue-500 text-md disabled:bg-gray-500"
                 >
-                    {isLoading? "Saving..." : "Confirm Booking"}
+                    {isLoading ? "Saving..." : "Confirm Booking"}
                 </button>
             </div>
         </form>
