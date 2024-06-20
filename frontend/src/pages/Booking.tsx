@@ -36,12 +36,13 @@ const Booking = () => {
     );
 
     const { data: hotel } = useQuery(
-        "fetchHotelById",
-        () => apiClient.fetchHotelById(hotelId as string),
+        "fetchHotelDetailById",
+        () => apiClient.fetchHotelDetailById(hotelId as string),
         {
             enabled: !!hotelId,
         }
     );
+
     const { data: currentUser } = useQuery(
         "fetchCurrentUser",
         apiClient.fetchCurrentUser
